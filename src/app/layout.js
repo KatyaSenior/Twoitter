@@ -6,8 +6,17 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import "./globals.css";
+import { auth } from "@clerk/nextjs/server";
+import { db } from "@/lib/db";
+import { sql } from "@vercel/postgres";
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const { userId } = auth();
+
+  const profiles = await sql`SELECT * FROM profile WHERE clerk_id = ${userId}`;
+  if (profiles.rowCount === 0 && userId) {
+    await db.query(`INSERT INTO profile (clerk_id) VALUES ('${userId}')`);
+  }
   return (
     <ClerkProvider>
       <html lang="en">
@@ -15,12 +24,9 @@ export default function RootLayout({ children }) {
           <header>
             <SignedOut>
               <SignInButton />
-              <p>This p tag will only show when I am signed out</p>
             </SignedOut>
-
             <SignedIn>
               <UserButton />
-              <p>This p tag will only show when I am signed in</p>
             </SignedIn>
           </header>
           <main>{children}</main>
