@@ -1,8 +1,7 @@
 User Stories
-🐿️ As a user, I am able to sign up for an account and create a user profile
-🐿️ As a user, I am able to log in and out of my account
-🐿️ As a user, I am able to create posts on my profile timeline
-🐿️ As a user, I am able to see all posts by all users on a global timeline
+🐿️ As a user, I am able to sign up for an account and create a user profile. ACHEIVED.
+🐿️ As a user, I am able to log in and out of my account. ACHEIVED.
+🐿️ As a user, I am able to create posts on my profile timeline. ACHEIVED.
 Stretch Stories
 🐿️ As a user, I am able to see a list of other user's posts and/or profiles on the site
 🐿️ As a user, I am able able to visit other user profiles
@@ -19,7 +18,7 @@ Requirements:
 
 🎯 Enable users to create posts associated with the userId, and display those posts on the user's profile page.
 
-🎯 Show a 404 error if a user profile doesn't exist
+🎯 Show a 404 error if a user profile doesn't exist. ACHEIVED.
 
 🎯 Use at least 1 Radix UI Primitive or similar
 

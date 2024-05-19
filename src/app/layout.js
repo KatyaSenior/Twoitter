@@ -9,6 +9,7 @@ import "./globals.css";
 import { auth } from "@clerk/nextjs/server";
 import { sql } from "@vercel/postgres";
 import ProfileForm from "./user/[userId]/page";
+import Link from "next/link";
 
 export default async function RootLayout({ children }) {
   const { userId } = auth();
