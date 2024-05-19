@@ -13,11 +13,11 @@ Requirements:
 
 🎯 Use Clerk.com to set up user signup and login. ACHEIVED.
 
-🎯 Use the Clerk userId to associate posts with a user.
+🎯 Use the Clerk userId to associate posts with a user. ACHEIVED.
 
 🎯 Enable each user to create a profile associated with their userId, and a form to input their biography and location data, etc. with a URL similar to /user/[userId].
 
-🎯 Enable users to create posts associated with the userId, and display those posts on the user's profile page
+🎯 Enable users to create posts associated with the userId, and display those posts on the user's profile page.
 
 🎯 Show a 404 error if a user profile doesn't exist
 

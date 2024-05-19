@@ -7,16 +7,25 @@ import {
 } from "@clerk/nextjs";
 import "./globals.css";
 import { auth } from "@clerk/nextjs/server";
-import { db } from "@/lib/db";
 import { sql } from "@vercel/postgres";
+import ProfileForm from "./user/[userId]/page";
 
 export default async function RootLayout({ children }) {
   const { userId } = auth();
 
-  const profiles = await sql`SELECT * FROM profile WHERE clerk_id = ${userId}`;
-  if (profiles.rowCount === 0 && userId) {
-    await db.query(`INSERT INTO profile (clerk_id) VALUES ('${userId}')`);
+  let hasUsername = false;
+
+  if (userId) {
+    const twoitterProfiles =
+      await sql`SELECT * FROM twoitterProfiles WHERE clerk_id = ${userId}`;
+
+    if (twoitterProfiles.rowCount === 0) {
+      await sql`INSERT INTO twoitterProfiles (clerk_id) VALUES (${userId})`;
+    } else {
+      hasUsername = twoitterProfiles.rows[0]?.username !== null;
+    }
   }
+
   return (
     <ClerkProvider>
       <html lang="en">
@@ -29,7 +38,10 @@ export default async function RootLayout({ children }) {
               <UserButton />
             </SignedIn>
           </header>
-          <main>{children}</main>
+          <main>
+            <SignedOut>{children}</SignedOut>
+            <SignedIn>{hasUsername ? children : <ProfileForm />}</SignedIn>
+          </main>
         </body>
       </html>
     </ClerkProvider>
